@@ -61,6 +61,7 @@ func countWordsAndImages(n *html.Node) (words, images int) {
 func countWordsInStr(s string) (int, error) {
 	var count int
 	input := bufio.NewScanner(strings.NewReader(s))
+	input.Split(bufio.ScanWords)
 	for input.Scan() {
 		count++
 	}

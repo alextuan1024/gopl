@@ -20,8 +20,8 @@ func main() {
 		done <- struct{}{} // signal the main goroutine
 	}()
 	mustCopy(conn, os.Stdin) // NOTE: 由于调用的io.Copy，所以只会在读取出错时返回，否则阻塞
-	conn.CloseWrite()
-	<-done // waite for background goroutine to finish
+	conn.CloseWrite()        // 分别关闭写和读 closing write an read separately
+	<-done                   // waite for background goroutine to finish
 	conn.CloseRead()
 }
 
